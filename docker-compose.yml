@@ -1,0 +1,58 @@
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: bitakhani/laravel-docker
+        restart: unless-stopped
+        environment:
+            DB_HOST: db
+            DB_PASSWORD: root
+        container_name: app
+        volumes:
+            -  ./:/var/www
+            - ./config/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+
+    webserver:
+        build:
+            context: .
+            dockerfile: Dockerfile_Nginx
+        image: bitakhani/nginx
+        container_name: webserver
+        restart: unless-stopped
+        ports:
+            -   "80:80"
+        volumes:
+            - ./:/var/www
+            - ./config/nginx/conf.d/:/etc/nginx/conf.d/
+            - ./config/nginx/conf.d/.htpasswd:/etc/nginx/.htpasswd
+        depends_on:
+            - app
+            - pma
+
+    db:
+        image: mysql
+        container_name: db
+        environment:
+            MYSQL_DATABASE: laravel-docker
+            MYSQL_ROOT_PASSWORD: root
+        restart: unless-stopped
+        volumes:
+            -   dbdata:/var/lib/mysql
+
+    pma:
+        image: phpmyadmin
+        container_name: phpmyadmin
+        restart: unless-stopped
+        environment:
+            PMA_HOST: db
+            PMA_USER: root
+            PMA_PASSWORD: root
+        #ports:
+         #   -   "8081:80"
+        depends_on:
+            -   db
+
+volumes:
+    dbdata:
+        driver: local

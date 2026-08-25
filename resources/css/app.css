@@ -1,0 +1,256 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap');
+
+@theme {
+    --color-base-bg: #14161c;
+    --color-base-raise: #1c1f27;
+    --color-base-card: #20232c;
+    --color-base-line: #333747;
+
+    --color-accent: #2ee6b8;
+    --color-accent-dim: #1a8f6f;
+
+    --font-mono: "JetBrains Mono", monospace;
+    --font-sans: "IRANYekan", sans-serif;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+body {
+    background-color: #14161c;
+    color: #f0eee8;
+}
+
+body:lang(fa) {
+    font-family: 'IRANYekan', sans-serif;
+}
+
+body:lang(en) {
+    font-family: 'Inter', sans-serif;
+}
+
+/* ===== ترمینال: افکت تایپ‌شدن ===== */
+.terminal-typed {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-inline-end: 2px solid #2ee6b8;
+    width: 0;
+    animation: typing 1.8s steps(26, end) 0.6s forwards,
+    blink-cursor 0.8s step-end infinite 2.4s;
+}
+
+@keyframes typing {
+    to { width: 26ch; }
+}
+
+@keyframes blink-cursor {
+    50% { border-color: transparent; }
+}
+
+/* ===== کدهای شناور دور عکس ===== */
+.floating-code {
+    position: absolute;
+    opacity: 0;
+    animation: float-in 0.6s ease forwards, float-y 5s ease-in-out infinite;
+}
+
+@keyframes float-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float-y {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-10px); }
+}
+
+/* ===== هاور کارت پروژه: پایه‌ی مشترک (رنگ قاب + گلو)، در همه‌ی سایزها ===== */
+.project-card {
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    border-color: #1a8f6f;
+    box-shadow: 0 0 24px -8px rgba(46, 230, 184, 0.35);
+}
+
+/* چون project-card و reveal گاهی رو یه المان هم‌زمان هستن، transition هردو رو اینجا با هم ترکیب می‌کنیم
+   تا یکی جایگزین اون یکی نشه */
+.project-card.reveal {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* ===== دسکتاپ (از ۷۶۸px به بالا): خط چرخان قدیمی، بدون تغییر ===== */
+@media (min-width: 768px) {
+    .project-card::before {
+        content: '';
+        position: absolute;
+        inset: -1px;
+        border-radius: 1rem;
+        padding: 1px;
+        background: conic-gradient(from 0deg, #2ee6b8, transparent 30%, transparent 70%, #2ee6b8);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.3s;
+        animation: spin-border 3s linear infinite paused;
+        pointer-events: none;
+    }
+
+    .project-card:hover::before {
+        opacity: 1;
+        animation-play-state: running;
+    }
+}
+
+@keyframes spin-border {
+    to { transform: rotate(360deg); }
+}
+
+/* ===== موبایل (زیر ۷۶۸px): خط نازک و ساده که یک‌بار دور کارت کشیده می‌شود و ثابت می‌ماند ===== */
+@media (max-width: 767px) {
+    .card-border-track rect {
+        fill: none;
+        stroke: #2ee6b8;
+        stroke-width: 1.5;
+        vector-effect: non-scaling-stroke;
+        stroke-dasharray: 500;
+        stroke-dashoffset: 500;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .project-card:hover .card-border-track rect {
+        opacity: 1;
+        animation: border-draw-once 2.4s ease forwards;
+    }
+
+    @keyframes border-draw-once {
+        to { stroke-dashoffset: 0; }
+    }
+}
+
+/* ===== هاور کارت مهارت: کج‌شدن ظریف ===== */
+.skill-card {
+    transition: transform 0.25s ease, border-color 0.25s ease;
+    cursor: default;
+    user-select: none;
+}
+
+.skill-card:hover {
+    transform: rotate(-1.5deg) scale(1.04);
+    border-color: #1a8f6f;
+}
+
+/* ===== کِرسر ===== */
+.no-text-cursor {
+    cursor: default;
+    user-select: none;
+}
+
+button[type="submit"] {
+    cursor: pointer;
+}
+
+/* ===== SVG helper: پوشش کامل کارت + حالت پیش‌فرض همیشگی شفاف (بدون این خط، رو دسکتاپ مستطیل مشکی می‌شود) ===== */
+.card-border-track {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.card-border-track rect {
+    fill: none;
+}
+
+/* ===== عکس درباره‌ی من: بدون قاب در حالت عادی، با هاور یک‌بار دور کامل کشیده می‌شود و می‌ماند ===== */
+.photo-frame {
+    position: relative;
+    overflow: hidden;
+}
+
+.photo-frame img {
+    transition: transform 0.4s ease;
+}
+
+.photo-frame:hover img {
+    transform: scale(1.05);
+}
+
+.photo-frame .card-border-track rect {
+    stroke: #2ee6b8;
+    stroke-width: 1.5;
+    vector-effect: non-scaling-stroke;
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.photo-frame:hover .card-border-track rect {
+    opacity: 1;
+    animation: photo-border-draw 1.8s ease forwards;
+}
+
+@keyframes photo-border-draw {
+    to { stroke-dashoffset: 0; }
+}
+
+/* ===== کادر بیوگرافی: خارج‌شدن از یکنواختی ===== */
+.bio-card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.bio-card:hover {
+    transform: translateY(-3px);
+    border-color: #1a8f6f;
+}
+
+/* یه گیومه‌ی بزرگ تزئینی، خیلی محو، گوشه‌ی بالا */
+.bio-card::before {
+    content: '\201C';
+    position: absolute;
+    top: -18px;
+    inset-inline-start: 20px;
+    font-size: 140px;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: #2ee6b8;
+    opacity: 0.08;
+    line-height: 1;
+    pointer-events: none;
+}
+
+/* یه نوار باریک رنگی سمت شروع متن، برای شکستن یکنواختی */
+.bio-card {
+    border-inline-start-width: 3px;
+    border-inline-start-color: #2ee6b8;
+}
+
+/* ایموجی‌های داخل متن بیو، یه ضربان ملایم داشته باشن */
+.pulse-emoji {
+    display: inline-block;
+    animation: pulse-emoji 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse-emoji {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.18); }
+}
