@@ -1,0 +1,10 @@
+{
+    "platform": "laravel",
+    "app": "bitadev",
+    "port": 80,
+    "php-version": "8.3",
+    "build": {
+        "location": "iran"
+    },
+    "disks": []
+}
