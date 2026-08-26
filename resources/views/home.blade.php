@@ -5,7 +5,7 @@
 @section('content')
 
     {{-- ===================== HERO ===================== --}}
-    <section class="min-h-screen grid md:grid-cols-[1.15fr_0.85fr] items-center gap-10 px-6 md:px-16 pt-32">
+    <section class="min-h-screen grid md:grid-cols-[1.15fr_0.85fr] items-center gap-10 px-6 md:px-20 pt-32">
         <div class="reveal">
             <div
                 class="font-mono text-sm max-w-md mb-8 bg-base-raise border border-base-line rounded-lg overflow-hidden">
@@ -51,7 +51,7 @@
 
             <div
                 class="floating-code font-mono text-xs bg-base-card border border-base-line rounded-lg px-3 py-2 text-[#ff6a4d]"
-                style="top:6%; left:-4%; animation-delay: 0.9s, 1.6s; direction: ltr;">
+                style="top:0; left:-4%; animation-delay: 0.9s, 1.6s; direction: ltr;">
                 Route::apiResource(...)
             </div>
             <div
@@ -61,7 +61,7 @@
             </div>
             <div
                 class="floating-code font-mono text-xs bg-base-card border border-base-line rounded-lg px-3 py-2 text-accent"
-                style="top:22%; right:-4%; animation-delay: 1.3s, 1.2s; direction: ltr;">
+                style="top:12%; right:-4%; animation-delay: 1.3s, 1.2s; direction: ltr;">
                 $job->onQueue('high')
             </div>
             <div
