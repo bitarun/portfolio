@@ -55,34 +55,37 @@
         </a>
 
         <div class="hidden md:flex gap-9 text-sm text-gray-400">
-            <a href="{{ route('projects.index') }}" class="hover:text-white transition">
-                {{ __('nav.projects') }}
-            </a>
-            <a href="{{ route('home') }}#skills" class="hover:text-white transition">
-                {{ __('nav.skills') }}
-            </a>
-            <a href="{{ route('home') }}#about" class="hover:text-white transition">
-                {{ __('nav.about') }}
-            </a>
-            <a href="{{ route('cv') }}" class="hover:text-white transition">
-                {{ __('nav.cv') }}
-            </a>
-            <a href="{{ route('home') }}#contact" class="hover:text-white transition">
-                {{ __('nav.contact') }}
-            </a>
+            <a href="{{ route('projects.index') }}" class="hover:text-white transition">{{ __('nav.projects') }}</a>
+            <a href="{{ route('home') }}#skills" class="hover:text-white transition">{{ __('nav.skills') }}</a>
+            <a href="{{ route('home') }}#about" class="hover:text-white transition">{{ __('nav.about') }}</a>
+            <a href="{{ route('cv') }}" class="hover:text-white transition">{{ __('nav.cv') }}</a>
+            <a href="{{ route('home') }}#contact" class="hover:text-white transition">{{ __('nav.contact') }}</a>
         </div>
 
-        {{-- سوییچ زبان --}}
-        <div class="flex gap-2 font-mono text-xs">
-            <a href="{{ route('locale.switch', 'fa') }}"
-               class="px-3 py-1.5 rounded-full border {{ app()->getLocale() === 'fa' ? 'border-accent text-accent' : 'border-base-line text-gray-400' }}">
-                FA
-            </a>
-            <a href="{{ route('locale.switch', 'en') }}"
-               class="px-3 py-1.5 rounded-full border {{ app()->getLocale() === 'en' ? 'border-accent text-accent' : 'border-base-line text-gray-400' }}">
-                EN
-            </a>
+        <div class="flex items-center gap-3">
+            <div class="flex gap-2 font-mono text-xs">
+                <a href="{{ route('locale.switch', 'fa') }}"
+                   class="px-3 py-1.5 rounded-full border {{ app()->getLocale() === 'fa' ? 'border-accent text-accent' : 'border-base-line text-gray-400' }}">FA</a>
+                <a href="{{ route('locale.switch', 'en') }}"
+                   class="px-3 py-1.5 rounded-full border {{ app()->getLocale() === 'en' ? 'border-accent text-accent' : 'border-base-line text-gray-400' }}">EN</a>
+            </div>
+
+            {{-- دکمه‌ی همبرگری، فقط تو موبایل دیده میشه --}}
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 w-8 h-8 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
         </div>
+    </div>
+
+    {{-- منوی موبایل، پیش‌فرض بسته --}}
+    <div id="mobile-menu" class="hidden md:hidden flex-col gap-1 px-6 pb-5 text-sm text-gray-300">
+        <a href="{{ route('projects.index') }}" class="block py-3 border-b border-base-line">{{ __('nav.projects') }}</a>
+        <a href="{{ route('home') }}#skills" class="block py-3 border-b border-base-line">{{ __('nav.skills') }}</a>
+        <a href="{{ route('home') }}#about" class="block py-3 border-b border-base-line">{{ __('nav.about') }}</a>
+        <a href="{{ route('cv') }}" class="block py-3 border-b border-base-line">{{ __('nav.cv') }}</a>
+        <a href="{{ route('home') }}#contact" class="block py-3">{{ __('nav.contact') }}</a>
     </div>
 </nav>
 

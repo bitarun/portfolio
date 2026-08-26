@@ -28,7 +28,7 @@
 
             <div class="flex gap-4">
                 <a href="{{ route('projects.index') }}"
-                   class="px-7 py-3.5 rounded-lg font-semibold bg-accent text-[#08110d] hover:bg-[#4ff2c9] transition">
+                   class="btn-accent-lift px-7 py-3.5 rounded-lg font-semibold bg-accent text-[#08110d] hover:bg-[#4ff2c9] transition">
                     {{ __('home.cta_projects') }}
                 </a>
                 <a href="#contact"
@@ -56,12 +56,12 @@
             </div>
             <div
                 class="floating-code font-mono text-xs bg-base-card border border-base-line rounded-lg px-3 py-2 text-accent"
-                style="bottom:12%; left:2%; animation-delay: 1.1s, 2s; direction: ltr;">
+                style="bottom:10%; left:2%; animation-delay: 1.1s, 2s; direction: ltr;">
                 Cache::remember(...)
             </div>
             <div
                 class="floating-code font-mono text-xs bg-base-card border border-base-line rounded-lg px-3 py-2 text-accent"
-                style="top:38%; right:-8%; animation-delay: 1.3s, 1.2s; direction: ltr;">
+                style="top:22%; right:-4%; animation-delay: 1.3s, 1.2s; direction: ltr;">
                 $job->onQueue('high')
             </div>
             <div
@@ -124,8 +124,7 @@
                         <rect x="1" y="1" width="calc(100% - 2px)" height="calc(100% - 2px)" rx="16" ry="16" />
                     </svg>
 
-                    <div
-                        class="bg-gradient-to-br from-[#10241d] to-base-bg flex items-center justify-center p-8 border-e border-base-line min-h-[180px]">
+                    <div class="bg-gradient-to-br from-[#10241d] to-[#0a0b0e] flex items-center justify-center p-8 border-e border-base-line min-h-[180px]">
                         @if($project->code_snippet)
                             <span class="font-mono text-sm text-accent-dim"
                                   dir="ltr">{{ $project->code_snippet }}</span>
@@ -192,7 +191,7 @@
                 <textarea name="message" rows="4" placeholder="{{ __('home.contact_message') }}"
                           class="bg-base-card border border-base-line rounded-lg px-4 py-3 focus:outline-none focus:border-accent"></textarea>
                 <button type="submit"
-                        class="cursor-pointer px-7 py-3.5 rounded-lg font-semibold bg-accent text-[#08110d] hover:bg-[#4ff2c9] transition w-fit">
+                        class="btn-accent-lift cursor-pointer px-7 py-3.5 rounded-lg font-semibold bg-accent text-[#08110d] hover:bg-[#4ff2c9] transition w-fit">
                     {{ __('home.contact_send') }}
                 </button>
 

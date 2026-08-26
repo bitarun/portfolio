@@ -38,6 +38,44 @@ body:lang(en) {
     font-family: 'Inter', sans-serif;
 }
 
+/* ===== گرید محو بکگراند ===== */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+}
+
+@media (max-width: 767px) {
+    body::before {
+        background-size: 42px 42px;
+    }
+}
+
+/* ===== افکت بالا رفتن دکمه‌های اصلی (سبز) ===== */
+.btn-accent-lift {
+    transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-accent-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px -8px rgba(46, 230, 184, 0.18);
+}
+
+@media (hover: none) {
+    .btn-accent-lift:active {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px -8px rgba(46, 230, 184, 0.18);
+    }
+}
+
 /* ===== ترمینال: افکت تایپ‌شدن ===== */
 .terminal-typed {
     display: inline-block;
@@ -72,6 +110,13 @@ body:lang(en) {
 @keyframes float-y {
     0%, 100% { transform: translateY(0); }
     50%      { transform: translateY(-10px); }
+}
+
+/* فقط اون تیکه‌کدی که رو موبایل روی عکس می‌افته، مخفی میشه */
+@media (max-width: 767px) {
+    .floating-code-overlap {
+        display: none;
+    }
 }
 
 /* ===== هاور کارت پروژه: پایه‌ی مشترک (رنگ قاب + گلو)، در همه‌ی سایزها ===== */
@@ -120,26 +165,20 @@ body:lang(en) {
     to { transform: rotate(360deg); }
 }
 
-/* ===== موبایل (زیر ۷۶۸px): خط نازک و ساده که یک‌بار دور کارت کشیده می‌شود و ثابت می‌ماند ===== */
+/* ===== موبایل (زیر ۷۶۸px): یک خط نازک و پیوسته (نه خط‌چین) که از لود صفحه پیوسته دور کارت می‌چرخد ===== */
 @media (max-width: 767px) {
     .card-border-track rect {
         fill: none;
         stroke: #2ee6b8;
-        stroke-width: 1.5;
+        stroke-width: 2;
         vector-effect: non-scaling-stroke;
-        stroke-dasharray: 500;
-        stroke-dashoffset: 500;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    .project-card:hover .card-border-track rect {
+        stroke-dasharray: 140 900;
         opacity: 1;
-        animation: border-draw-once 2.4s ease forwards;
+        animation: border-chase-mobile 3s linear infinite;
     }
 
-    @keyframes border-draw-once {
-        to { stroke-dashoffset: 0; }
+    @keyframes border-chase-mobile {
+        to { stroke-dashoffset: -1040; }
     }
 }
 
@@ -150,7 +189,8 @@ body:lang(en) {
     user-select: none;
 }
 
-.skill-card:hover {
+.skill-card:hover,
+.skill-card.is-tapped {
     transform: rotate(-1.5deg) scale(1.04);
     border-color: #1a8f6f;
 }
@@ -219,7 +259,8 @@ button[type="submit"] {
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.bio-card:hover {
+.bio-card:hover,
+.bio-card.is-tapped {
     transform: translateY(-3px);
     border-color: #1a8f6f;
 }
