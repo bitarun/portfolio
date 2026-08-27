@@ -17,8 +17,10 @@ class SkillSeeder extends Seeder
             ['name_fa' => 'Queue / Event / Job', 'name_en' => 'Queue / Event / Job', 'category' => 'backend', 'note_fa' => 'پردازش async و Task Scheduling', 'note_en' => 'Async processing & task scheduling', 'order' => 3],
             ['name_fa' => 'ساخت و انتشار پکیج', 'name_en' => 'Package Development', 'category' => 'backend', 'note_fa' => 'انتشار روی Packagist', 'note_en' => 'Published on Packagist', 'order' => 4],
             ['name_fa' => 'احراز هویت پیشرفته', 'name_en' => 'Advanced Authentication', 'category' => 'backend', 'note_fa' => 'OAuth، 2FA، Magic Login، RBAC سفارشی', 'note_en' => 'OAuth, 2FA, Magic Login, custom RBAC', 'order' => 5],
-            ['name_fa' => 'درگاه‌های پرداخت', 'name_en' => 'Payment Gateways', 'category' => 'backend', 'note_fa' => 'سامان، پاسارگاد، زرین‌پال، زیبال (REST و SOAP)', 'note_en' => 'Saman, Pasargad, Zarinpal, Zibal (REST & SOAP)', 'order' => 6],
-            ['name_fa' => 'Design Patterns', 'name_en' => 'Design Patterns', 'category' => 'backend', 'note_fa' => 'Decorator، Chain of Responsibility، Strategy، Repository', 'note_en' => 'Decorator, Chain of Responsibility, Strategy, Repository', 'order' => 7],
+            ['name_fa' => 'Laravel Sanctum', 'name_en' => 'Laravel Sanctum', 'category' => 'backend', 'note_fa' => 'احراز هویت API با توکن', 'note_en' => 'Token-based API authentication', 'order' => 6],
+            ['name_fa' => 'JWT', 'name_en' => 'JWT', 'category' => 'backend', 'note_fa' => 'احراز هویت مبتنی بر JSON Web Token', 'note_en' => 'JSON Web Token-based authentication', 'order' => 7],
+            ['name_fa' => 'Design Patterns', 'name_en' => 'Design Patterns', 'category' => 'backend', 'note_fa' => 'Decorator، Chain of Responsibility، Strategy، Repository', 'note_en' => 'Decorator, Chain of Responsibility, Strategy, Repository', 'order' => 8],
+            ['name_fa' => 'درگاه‌های پرداخت', 'name_en' => 'Payment Gateways', 'category' => 'backend', 'note_fa' => 'سامان، پاسارگاد، زرین‌پال، زیبال (REST و SOAP)', 'note_en' => 'Saman, Pasargad, Zarinpal, Zibal (REST & SOAP)', 'order' => 9],
 
             // ================= Database =================
             ['name_fa' => 'MySQL', 'name_en' => 'MySQL', 'category' => 'database', 'note_fa' => 'طراحی اسکیما، رفع N+1 Query', 'note_en' => 'Schema design, N+1 query resolution', 'order' => 1],
