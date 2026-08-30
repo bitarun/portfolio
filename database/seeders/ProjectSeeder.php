@@ -52,9 +52,9 @@ class ProjectSeeder extends Seeder
                 'demo_url' => null,
                 'code_snippet' => '$ php artisan serve',
                 'screenshots' => [
-                    'videoshare-1.png', 'videoshare-2.png', 'videoshare-3.png',
-                    'videoshare-4.png', 'videoshare-5.png', 'videoshare-6.png', 'videoshare-7.png',
-                    'videoshare-8.png', 'videoshare-9.png', 'videoshare-10.png'
+                    'videoshare-1.jpg', 'videoshare-2.jpg', 'videoshare-3.jpg',
+                    'videoshare-4.jpg', 'videoshare-5.jpg', 'videoshare-6.jpg', 'videoshare-7.jpg',
+                    'videoshare-8.jpg', 'videoshare-9.jpg', 'videoshare-10.jpg'
                 ],
                 'order' => 1,
                 'is_featured' => true,
@@ -91,9 +91,9 @@ class ProjectSeeder extends Seeder
                 'demo_url' => null,
                 'code_snippet' => 'OrderService::checkout($cart)',
                 'screenshots' => [
-                    'eduport-1.png', 'eduport-2.png', 'eduport-3.png', 'eduport-4.png',
-                    'eduport-5.png', 'eduport-6.png', 'eduport-7.png', 'eduport-8.png',
-                    'eduport-9.png', 'eduport-10.png', 'eduport-11.png'
+                    'eduport-1.jpg', 'eduport-2.jpg', 'eduport-3.jpg', 'eduport-4.jpg',
+                    'eduport-5.jpg', 'eduport-6.jpg', 'eduport-7.jpg', 'eduport-8.jpg',
+                    'eduport-9.jpg', 'eduport-10.jpg', 'eduport-11.jpg'
                 ],
                 'order' => 2,
                 'is_featured' => true,
@@ -130,8 +130,8 @@ class ProjectSeeder extends Seeder
                 'demo_url' => null,
                 'code_snippet' => 'event(new PostPublished($post))',
                 'screenshots' => [
-                    'blogzine-1.png', 'blogzine-2.png', 'blogzine-3.png',
-                    'blogzine-4.png', 'blogzine-5.png', 'blogzine-6.png'
+                    'blogzine-1.jpg', 'blogzine-2.jpg', 'blogzine-3.jpg',
+                    'blogzine-4.jpg', 'blogzine-5.jpg', 'blogzine-6.jpg'
                 ],
                 'order' => 3,
                 'is_featured' => true,
@@ -166,8 +166,8 @@ class ProjectSeeder extends Seeder
                 'demo_url' => null,
                 'code_snippet' => "Product::search('...')->get()",
                 'screenshots' => [
-                    'shoppino-1.png', 'shoppino-2.png', 'shoppino-3.png', 'shoppino-4.png',
-                    'shoppino-5.png', 'shoppino-6.png', 'shoppino-7.png',
+                    'shoppino-1.jpg', 'shoppino-2.jpg', 'shoppino-3.jpg', 'shoppino-4.jpg',
+                    'shoppino-5.jpg', 'shoppino-6.jpg', 'shoppino-7.jpg',
                 ],
                 'order' => 4,
                 'is_featured' => true,
@@ -197,7 +197,7 @@ class ProjectSeeder extends Seeder
                 'github_url' => 'https://github.com/bitarun/booking-gym',
                 'demo_url' => null,
                 'screenshots' => [
-                    'gym-1.png', 'gym-2.png', 'gym-3.png', 'gym-4.png',
+                    'gym-1.jpg', 'gym-2.jpg', 'gym-3.jpg', 'gym-4.jpg',
                 ],
                 'order' => 5,
                 'is_featured' => false,

@@ -159,7 +159,7 @@
         <div class="reveal grid md:grid-cols-[0.5fr_1.5fr] gap-12 items-center">
             <div class="photo-frame w-full aspect-[3/5] rounded-2xl overflow-hidden">
                 <img
-                    src="{{ asset('images/profile-photo.png') }}"
+                    src="{{ asset('images/profile-photo.jpg') }}"
                     alt="{{ __('home.photo_placeholder') }}"
                     class="w-full h-full object-cover object-center"
                 >
