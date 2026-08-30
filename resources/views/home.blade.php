@@ -40,7 +40,7 @@
 
         <div class="relative flex items-center justify-center h-96">
             <div class="relative w-full max-w-xs mx-auto">
-                @if(file_exists(public_path('images/me.png')))
+                @if(file_exists(public_path('images/me.webp')))
                     <img src="{{ asset('images/me.png') }}" alt="Bita" class="w-full h-auto object-contain">
                 @else
                     <div class="w-64 h-64 rounded-3xl flex items-center justify-center text-center text-gray-600 text-xs shadow-2xl">
