@@ -18,7 +18,7 @@ class Project extends Model
         'category',
         'tech_stack',
         'highlights_fa', 'highlights_en',
-        'github_url', 'demo_url', 'cover_image', 'code_snippet',
+        'github_url', 'demo_url', 'cover_image', 'code_snippet', 'screenshots',
         'order', 'is_featured',
     ];
 
@@ -26,6 +26,7 @@ class Project extends Model
         'tech_stack' => 'array',
         'highlights_fa' => 'array',
         'highlights_en' => 'array',
+        'screenshots' => 'array',
         'is_featured' => 'boolean',
     ];
 

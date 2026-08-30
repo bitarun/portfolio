@@ -82,6 +82,34 @@
                                     </a>
                                 @endif
                             </div>
+
+                            @if(!empty($project->screenshots))
+                                <div class="mb-6">
+                                    <h4 class="font-mono text-sm text-accent mb-3">{{ __('projects.screenshots') }}</h4>
+                                    <div class="screenshot-carousel relative">
+                                        <div class="screenshot-track rounded-lg border border-base-line overflow-hidden">
+                                            @foreach($project->screenshots as $i => $shot)
+                                                <img src="{{ asset('images/projects/' . $shot) }}"
+                                                     class="screenshot-slide w-full cursor-zoom-in {{ $i === 0 ? '' : 'hidden' }}"
+                                                     data-index="{{ $i }}"
+                                                     alt="{{ $project->title }} screenshot {{ $i + 1 }}">
+                                            @endforeach
+                                        </div>
+
+                                        @if(count($project->screenshots) > 1)
+                                            <button type="button" class="screenshot-prev absolute top-1/2 -translate-y-1/2 start-2 bg-base-bg/80 hover:bg-base-bg rounded-full w-8 h-8 flex items-center justify-center text-lg">‹</button>
+                                            <button type="button" class="screenshot-next absolute top-1/2 -translate-y-1/2 end-2 bg-base-bg/80 hover:bg-base-bg rounded-full w-8 h-8 flex items-center justify-center text-lg">›</button>
+
+                                            <div class="screenshot-dots flex justify-center gap-1.5 mt-3">
+                                                @foreach($project->screenshots as $i => $shot)
+                                                    <span class="w-1.5 h-1.5 rounded-full {{ $i === 0 ? 'bg-accent' : 'bg-base-line' }}"></span>
+                                                @endforeach
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endif
+
                         </div>
                     </div>
                 @empty
@@ -102,6 +130,11 @@
             </button>
             <div id="modal-body"></div>
         </div>
+    </div>
+
+    <div id="lightbox" class="hidden fixed inset-0 z-[60] items-center justify-center bg-black/90 px-6">
+        <button id="lightbox-close" class="absolute top-6 end-6 text-white text-3xl">&times;</button>
+        <img id="lightbox-img" src="" class="max-w-full max-h-[85vh] rounded-lg">
     </div>
 
 @endsection
@@ -150,6 +183,37 @@
                     }, 200);
                 }
             }
+
+            $(document).on('click', '.screenshot-next', function () {
+                const carousel = $(this).closest('.screenshot-carousel');
+                const slides = carousel.find('.screenshot-slide');
+                const dots = carousel.find('.screenshot-dots span');
+                const current = slides.filter(':visible').data('index');
+                const next = (current + 1) % slides.length;
+                slides.addClass('hidden').eq(next).removeClass('hidden');
+                dots.removeClass('bg-accent').addClass('bg-base-line').eq(next).addClass('bg-accent').removeClass('bg-base-line');
+            });
+
+            $(document).on('click', '.screenshot-prev', function () {
+                const carousel = $(this).closest('.screenshot-carousel');
+                const slides = carousel.find('.screenshot-slide');
+                const dots = carousel.find('.screenshot-dots span');
+                const current = slides.filter(':visible').data('index');
+                const prev = (current - 1 + slides.length) % slides.length;
+                slides.addClass('hidden').eq(prev).removeClass('hidden');
+                dots.removeClass('bg-accent').addClass('bg-base-line').eq(prev).addClass('bg-accent').removeClass('bg-base-line');
+            });
+
+            $(document).on('click', '.screenshot-slide', function () {
+                $('#lightbox-img').attr('src', $(this).attr('src'));
+                $('#lightbox').removeClass('hidden').addClass('flex');
+            });
+
+            $('#lightbox-close, #lightbox').on('click', function (e) {
+                if (e.target.id === 'lightbox-close' || e.target.id === 'lightbox') {
+                    $('#lightbox').addClass('hidden').removeClass('flex');
+                }
+            });
         });
     </script>
 @endpush

@@ -51,6 +51,11 @@ class ProjectSeeder extends Seeder
                 'github_url' => 'https://github.com/bitarun/video-share',
                 'demo_url' => null,
                 'code_snippet' => '$ php artisan serve',
+                'screenshots' => [
+                    'videoshare-1.png', 'videoshare-2.png', 'videoshare-3.png',
+                    'videoshare-4.png', 'videoshare-5.png', 'videoshare-6.png', 'videoshare-7.png',
+                    'videoshare-8.png', 'videoshare-9.png', 'videoshare-10.png'
+                ],
                 'order' => 1,
                 'is_featured' => true,
             ],
@@ -85,6 +90,11 @@ class ProjectSeeder extends Seeder
                 'github_url' => 'https://github.com/bitarun/eduport',
                 'demo_url' => null,
                 'code_snippet' => 'OrderService::checkout($cart)',
+                'screenshots' => [
+                    'eduport-1.png', 'eduport-2.png', 'eduport-3.png', 'eduport-4.png',
+                    'eduport-5.png', 'eduport-6.png', 'eduport-7.png', 'eduport-8.png',
+                    'eduport-9.png', 'eduport-10.png', 'eduport-11.png'
+                ],
                 'order' => 2,
                 'is_featured' => true,
             ],
@@ -119,6 +129,10 @@ class ProjectSeeder extends Seeder
                 'github_url' => 'https://github.com/bitarun/blogzine',
                 'demo_url' => null,
                 'code_snippet' => 'event(new PostPublished($post))',
+                'screenshots' => [
+                    'blogzine-1.png', 'blogzine-2.png', 'blogzine-3.png',
+                    'blogzine-4.png', 'blogzine-5.png', 'blogzine-6.png'
+                ],
                 'order' => 3,
                 'is_featured' => true,
             ],
@@ -151,6 +165,10 @@ class ProjectSeeder extends Seeder
                 'github_url' => 'https://github.com/bitarun/shoppino',
                 'demo_url' => null,
                 'code_snippet' => "Product::search('...')->get()",
+                'screenshots' => [
+                    'shoppino-1.png', 'shoppino-2.png', 'shoppino-3.png', 'shoppino-4.png',
+                    'shoppino-5.png', 'shoppino-6.png', 'shoppino-7.png',
+                ],
                 'order' => 4,
                 'is_featured' => true,
             ],
@@ -178,6 +196,9 @@ class ProjectSeeder extends Seeder
                 ],
                 'github_url' => 'https://github.com/bitarun/booking-gym',
                 'demo_url' => null,
+                'screenshots' => [
+                    'gym-1.png', 'gym-2.png', 'gym-3.png', 'gym-4.png',
+                ],
                 'order' => 5,
                 'is_featured' => false,
             ],

@@ -6,6 +6,7 @@ return [
     'view_details' => 'View details',
     'view_demo' => 'View demo',
     'highlights' => 'Highlights',
+    'screenshots' => 'Screenshots',
     'empty_category' => 'No projects in this category yet.',
     'view_full_details' => 'View full details and source code:',
     'category' => [
