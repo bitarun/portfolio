@@ -13,7 +13,7 @@
         <div class="flex flex-wrap gap-3 mb-12 text-sm" id="category-tabs">
             @foreach($categories as $index => $category)
                 <button
-                    class="tab-btn px-5 py-2.5 rounded-full border transition {{ $index === 0 ? 'border-accent text-accent' : 'border-base-line text-gray-400' }}"
+                    class="tab-btn px-5 py-2.5 rounded-full border transition cursor-pointer {{ $index === 0 ? 'border-accent text-accent' : 'border-base-line text-gray-400' }}"
                     data-category="{{ $category }}"
                     data-color="{{ $category === 'main' ? 'accent' : 'orange' }}">
                     {{ __('projects.category.' . $category) }}

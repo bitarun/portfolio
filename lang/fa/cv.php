@@ -32,7 +32,7 @@ return [
         [
             'title' => 'PHP MVC — دوره‌ی پایه‌ی برنامه‌نویسی',
             'provider' => 'کلیک‌سایت؛ گواهی بین‌المللی (وابسته به دانشگاه آکسفورد)، ۲۰۱۹',
-            'url' => '/images/certificates/php-mvc-oxford.jpg',
+            'url' => '/images/certificates/php-mvc-oxford.jpeg',
         ],
         ['title' => 'تست‌نویسی (PHPUnit / Pest)', 'provider' => 'YouTube'],
     ],
