@@ -1,21 +1,26 @@
 <?php
 
 return [
+    'meta_title' => 'Bita Badrkhani — PHP / Laravel Backend Developer',
+    'meta_description' => 'PHP / Laravel backend developer focused on API architecture, queues, Redis and Docker. Browse real projects with source code, and get in touch.',
+
     'hero_title' => 'I build systems that work <span class="text-accent">behind the scenes</span>, and work right.',
-    'hero_subtitle' => 'Backend developer focused on Laravel, API architecture, and infrastructure like Redis and Docker.',
+    'whoami' => 'bita — php / laravel backend developer',
+    'hero_subtitle' => 'PHP / Laravel backend developer focused on API architecture, queues, Redis and Docker.',
     'cta_projects' => 'View Projects',
     'cta_contact' => 'Get in Touch',
-    'photo_placeholder' => 'Your photo here',
+    'photo_placeholder' => 'Photo of Bita',
+    'photo_alt' => 'Illustrated portrait of Bita working at a computer',
 
-    'skills_eyebrow' => 'Expertise',
-    'skills_title' => 'From the database to the message queue, I design every layer',
+    'skills_eyebrow' => 'Skills',
+    'skills_title' => 'The stack I build with',
 
     'projects_eyebrow' => 'Portfolio',
     'projects_title' => 'Featured Projects',
 
     'about_eyebrow' => 'About Me',
     'about_title' => 'Why Programming',
-    'bio_placeholder' => 'I’ve always thought there’s an interesting and beautiful balance between creativity and logic, and web development is where I get to bring both of them together. <span class="pulse-emoji">💡</span><br><br>For me, coding is much more than just writing lines of code. It’s about taking an idea, breaking it down into smaller pieces, figuring out how those pieces should work together, and eventually turning all of them into something real and useful. What I love about this process is that even a complex system full of tiny details can feel simple and seamless once everything falls into place. Behind that simplicity, there might be hours of thinking, experimenting, making mistakes, and solving problems.<br><br>That combination of creativity and logic is what keeps me interested in software development. Coding pushes me to think carefully, find solutions to problems, pay attention to details, and always look for better ways to build things. <span class="pulse-emoji">🚀</span><br><br>I’m still learning, experimenting, and building, but every project gives me a chance to learn something new and take another step forward. What I love about this field is that it can be beautiful and exciting, while at times being completely messy and complicated. Yet, in the end, it demands a great deal of precision. It’s some of the most challenging work I’ve ever done, but also some of the most rewarding.<br><br>I always try to bring the best of myself into everything I build and turn every project into an opportunity to grow. <br><br>Welcome, and take a look around.<span class="pulse-emoji">✨</span>',
+    'bio' => 'I\'m a PHP / Laravel backend developer. I like the balance of creativity and logic in backend work: taking an idea, breaking it into smaller pieces, and making those pieces work together so the result feels simple to use. Behind that simplicity there are usually hours of thinking, experimenting and fixing mistakes, and that is the part I enjoy most.<br><br>I\'m looking for my first professional backend role. So far I\'ve built full Laravel systems on my own, with payment flows, queues, real-time chat, Redis and APIs, and I\'m ready to bring that to a team and keep growing fast.',
 
     'contact_eyebrow' => 'Get in Touch',
     'contact_title' => "Let's Talk",
@@ -26,6 +31,11 @@ return [
     'contact_success' => 'Your message was sent successfully — I\'ll get back to you soon!',
     'view_all_projects' => 'View all projects',
 
-    'contact_phone_label' => 'Direct Call',
-    'contact_phone_note' => 'Available via call or WhatsApp',
+    'contact_direct' => 'Direct contact',
+    'contact_throttled' => 'You have sent several messages in a short time. Please wait a minute and try again.',
+    'contact_availability' => 'Open to on-site work in Qom, remote work from Tehran, and remote roles with international teams.',
+    'contact_error' => 'Sorry, your message could not be sent right now. Please try again later or write to me directly by email.',
+    'err_name' => 'Please enter your name.',
+    'err_email' => 'Please enter a valid email address.',
+    'err_message' => 'Please write a message (up to 2000 characters).',
 ];

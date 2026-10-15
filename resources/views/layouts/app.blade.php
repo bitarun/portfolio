@@ -4,9 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>@yield('title', 'Bita — Backend Developer')</title>
+    <title>@yield('title', __('home.meta_title'))</title>
+    <meta name="description" content="@yield('description', __('home.meta_description'))">
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    {{-- Link previews (LinkedIn, Telegram, WhatsApp, ...) --}}
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="BitaDev">
+    <meta property="og:title" content="@yield('title', __('home.meta_title'))">
+    <meta property="og:description" content="@yield('description', __('home.meta_description'))">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('images/me.webp') }}">
+    <meta name="twitter:card" content="summary">
+
+    {{-- jQuery is served locally (no external CDN dependency) --}}
+    <script src="{{ asset('js/vendor/jquery-3.6.1.min.js') }}"></script>
 
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
 

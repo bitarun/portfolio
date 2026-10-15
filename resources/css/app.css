@@ -83,12 +83,12 @@ body::before {
     white-space: nowrap;
     border-inline-end: 2px solid #2ee6b8;
     width: 0;
-    animation: typing 1.8s steps(26, end) 0.6s forwards,
+    animation: typing 1.8s steps(40, end) 0.6s forwards,
     blink-cursor 0.8s step-end infinite 2.4s;
 }
 
 @keyframes typing {
-    to { width: 26ch; }
+    to { width: 40ch; }
 }
 
 @keyframes blink-cursor {

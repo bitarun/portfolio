@@ -29,18 +29,41 @@
                  style="{{ $index === 0 ? '' : 'display:none' }}">
 
                 @forelse($projects[$category] as $project)
+                    @php($isMain = $category === 'main')
                     <div id="{{ $project->slug }}"
-                         class="project-card cursor-pointer bg-base-card border border-base-line rounded-2xl p-7 hover:border-accent-dim transition"
+                         class="project-card cursor-pointer bg-base-card border border-base-line rounded-2xl p-7 hover:border-accent-dim transition {{ $isMain ? 'md:flex md:gap-8' : '' }}"
                          data-slug="{{ $project->slug }}">
 
                         <svg class="card-border-track" preserveAspectRatio="none">
                             <rect x="1" y="1" width="calc(100% - 2px)" height="calc(100% - 2px)" rx="16" ry="16"/>
                         </svg>
 
-                        <h3 class="text-xl font-extrabold mb-2">{{ $project->title }}</h3>
-                        <p class="text-gray-400 text-sm mb-4">{{ $project->summary }}</p>
+                        {{-- Cover screenshot, so the card shows the real product --}}
+                        @if($project->cover_shot)
+                            <div class="relative overflow-hidden rounded-xl bg-base-raise border border-base-line {{ $isMain ? 'md:w-2/5 md:shrink-0 min-h-[190px] mb-5 md:mb-0' : 'h-44 mb-5' }}">
+                                <img src="{{ asset('images/projects/' . $project->cover_shot) }}"
+                                     alt="{{ $project->title }}"
+                                     loading="lazy"
+                                     class="absolute inset-0 w-full h-full object-cover object-top">
+                            </div>
+                        @endif
 
-                        <div class="flex flex-wrap gap-2 mb-2">
+                        <div class="flex-1 min-w-0">
+                        <h3 class="text-xl font-extrabold mb-2">{{ $project->title }}</h3>
+                        <p class="text-gray-300 text-sm mb-4">{{ $project->summary }}</p>
+
+                        {{-- First highlights stay visible, so nothing important hides behind a click --}}
+                        @if($isMain && count($project->highlights))
+                            <ul class="grid gap-1.5 mb-4">
+                                @foreach(array_slice($project->highlights, 0, 3) as $point)
+                                    <li class="text-gray-400 text-sm flex gap-2">
+                                        <span class="text-accent">▸</span> <span>{!! $point !!}</span>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+
+                        <div class="flex flex-wrap gap-2 mb-3">
                             @foreach($project->tech_stack as $tech)
                                 <span
                                     class="font-mono text-xs text-gray-400 border border-base-line rounded px-2 py-1">{{ $tech }}</span>
@@ -51,6 +74,7 @@
                             {{ __('projects.view_details') }}
                             <span class="inline-block ltr:rotate-180">←</span>
                         </span>
+                        </div>
 
                         <div class="hidden modal-content-source">
                             <h3 class="text-2xl font-extrabold mb-4">{{ $project->title }}</h3>
@@ -65,7 +89,19 @@
                                 @endforeach
                             </ul>
 
-                            <div class="flex items-center gap-3 flex-wrap">
+                            @if($project->video_url)
+                                <div class="mb-6">
+                                    <h4 class="font-mono text-sm text-accent mb-3">{{ __('projects.demo_video') }}</h4>
+                                    @if($project->video_embed_url)
+                                        <div class="video-slot aspect-video rounded-lg border border-base-line overflow-hidden bg-black"
+                                             data-embed="{{ $project->video_embed_url }}"></div>
+                                    @endif
+                                    <a href="{{ $project->video_url }}" target="_blank" rel="noopener"
+                                       class="inline-block mt-3 text-sm text-accent hover:underline">{{ __('projects.watch_video') }}</a>
+                                </div>
+                            @endif
+
+                            <div class="flex items-center gap-3 flex-wrap mb-6">
                                 <span class="text-gray-400 text-xs">{{ __('projects.view_full_details') }}</span>
 
                                 @if($project->github_url)
@@ -157,11 +193,19 @@
             $('.project-card').on('click', function () {
                 const content = $(this).find('.modal-content-source').html();
                 $('#modal-body').html(content);
+
+                // Load the video player only when the modal opens (nothing is fetched before that).
+                $('#modal-body .video-slot').each(function () {
+                    const src = $(this).data('embed');
+                    $(this).html('<iframe src="' + src + '" class="w-full h-full" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" title="Demo video"></iframe>');
+                });
+
                 $('#project-modal').removeClass('hidden').addClass('flex');
             });
 
             $('#modal-close, #modal-backdrop').on('click', function () {
                 $('#project-modal').addClass('hidden').removeClass('flex');
+                $('#modal-body').empty(); // also stops any playing video
             });
 
             const targetSlug = window.location.hash.replace('#', '');

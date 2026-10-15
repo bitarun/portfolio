@@ -10,146 +10,196 @@
     @vite(['resources/css/app.css'])
 
     <style>
+        @font-face { font-family: 'IRANYekan'; src: url('{{ asset('fonts/iranyekan/IRANYekanWebRegular.woff2') }}') format('woff2'); font-weight: 400; font-display: swap; }
+        @font-face { font-family: 'IRANYekan'; src: url('{{ asset('fonts/iranyekan/IRANYekanWebMedium.woff2') }}') format('woff2'); font-weight: 500; font-display: swap; }
+        @font-face { font-family: 'IRANYekan'; src: url('{{ asset('fonts/iranyekan/IRANYekanWebBold.woff2') }}') format('woff2'); font-weight: 700; font-display: swap; }
+        @font-face { font-family: 'Inter'; src: url('{{ asset('fonts/inter/inter-v20-latin-regular.woff2') }}') format('woff2'); font-weight: 400; font-display: swap; }
+        @font-face { font-family: 'Inter'; src: url('{{ asset('fonts/inter/inter-v20-latin-500.woff2') }}') format('woff2'); font-weight: 500; font-display: swap; }
+        @font-face { font-family: 'Inter'; src: url('{{ asset('fonts/inter/inter-v20-latin-600.woff2') }}') format('woff2'); font-weight: 600; font-display: swap; }
+        @font-face { font-family: 'Inter'; src: url('{{ asset('fonts/inter/inter-v20-latin-700.woff2') }}') format('woff2'); font-weight: 700; font-display: swap; }
+
+        @page { size: A4; margin: 0; }
+
+        :root {
+            --cv-ink: #111111;
+            --cv-muted: #555555;
+            --cv-soft: #777777;
+            --cv-green: #0b7a5e;
+        }
+
         body.cv-page {
             background: #f3f4f1;
-            color: #1a1a1a;
+            color: var(--cv-ink);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
+
+        .ltr-text { direction: ltr; unicode-bidi: isolate; display: inline-block; }
 
         .cv-sheet {
             background: #ffffff;
-            max-width: 210mm;
-            margin: 40px auto;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 24px auto 40px;
+            padding: 13mm 15mm;
+            font-size: 11.5px;
+            line-height: 1.5;
             box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.15);
+            box-sizing: border-box;
         }
 
+        /* The website notice is only for the PDF / printed version. */
+        .cv-notice { display: none; background: #fff4ef; border: 1px solid #ff6a4d; border-radius: 6px; color: #8a2f18; font-size: 11.5px; font-weight: 600; text-align: center; padding: 6px 10px; margin-bottom: 12px; }
+        .cv-notice a { color: #c2410c; text-decoration: underline; }
+
+        .cv-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 12px; }
+        .cv-name { font-size: 26px; font-weight: 700; line-height: 1.2; margin: 0; }
+        .cv-title { color: var(--cv-green); font-size: 13px; font-weight: 600; margin: 4px 0 0; }
+        .cv-contact { font-size: 11px; color: var(--cv-muted); line-height: 1.7; text-align: end; }
+        .cv-contact a { color: inherit; text-decoration: none; }
+
+        .cv-section { margin-bottom: 11px; }
+        .cv-h2 { font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cv-green); border-bottom: 1px solid #d9d9d9; padding-bottom: 2px; margin: 0 0 5px; }
+        .cv-text { color: #222; margin: 0; }
+
+        .cv-project { margin-bottom: 5px; }
+        .cv-project-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
+        .cv-project-name { font-weight: 700; }
+        .cv-project-stack { color: var(--cv-soft); font-size: 10.5px; }
+        .cv-project-text { color: #333; margin: 0; }
+        .cv-note { color: var(--cv-soft); font-size: 10.5px; margin: 4px 0 0; }
+        .cv-note a { color: inherit; text-decoration: underline; }
+
+        .cv-skill { margin: 0 0 2px; }
+        .cv-skill b { font-weight: 700; }
+        .cv-skill span { color: #333; }
+
+        .cv-path { list-style: none; padding: 0; margin: 0; }
+        .cv-path li { display: flex; gap: 10px; margin-bottom: 3px; }
+        .cv-path-year { flex: 0 0 38px; font-weight: 700; color: var(--cv-green); }
+
+        .cv-cert { margin: 0 0 4px; }
+        .cv-cert a { color: inherit; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
+        .cv-cert .prov { color: var(--cv-soft); }
+        .cv-courses { color: #333; margin: 0; }
+        .cv-courses .prov { color: var(--cv-soft); }
+
         @media print {
+            .cv-notice { display: block; }
             body.cv-page { background: #fff; }
             .no-print { display: none !important; }
-            .cv-sheet { box-shadow: none; margin: 0; max-width: 100%; }
+            .cv-sheet { box-shadow: none; margin: 0; width: 210mm; height: 297mm; overflow: hidden; }
         }
     </style>
 </head>
-<body class="cv-page font-sans">
+<body class="cv-page">
 
-<div class="no-print flex justify-between items-center px-6 py-4 max-w-[210mm] mx-auto">
+@php
+    $isFa = app()->getLocale() === 'fa';
+    $sep = $isFa ? '، ' : ', ';
+@endphp
+
+<div class="no-print flex justify-between items-center px-6 py-4 mx-auto" style="max-width: 210mm;">
     <a href="{{ route('home') }}" class="text-sm text-gray-600 hover:text-gray-900">
         <span class="inline-block rtl:rotate-180">←</span> {{ __('nav.home') }}
     </a>
     <div class="flex gap-3">
         <a href="{{ route('locale.switch', 'fa') }}"
-           class="text-xs px-3 py-1.5 rounded-full border {{ app()->getLocale() === 'fa' ? 'border-gray-900 text-gray-900' : 'border-gray-300 text-gray-400' }}">FA</a>
+           class="text-xs px-3 py-1.5 rounded-full border {{ $isFa ? 'border-gray-900 text-gray-900' : 'border-gray-300 text-gray-400' }}">FA</a>
         <a href="{{ route('locale.switch', 'en') }}"
-           class="text-xs px-3 py-1.5 rounded-full border {{ app()->getLocale() === 'en' ? 'border-gray-900 text-gray-900' : 'border-gray-300 text-gray-400' }}">EN</a>
-        <button onclick="window.print()" class="text-xs px-4 py-1.5 rounded-full bg-gray-900 text-white">
+           class="text-xs px-3 py-1.5 rounded-full border {{ ! $isFa ? 'border-gray-900 text-gray-900' : 'border-gray-300 text-gray-400' }}">EN</a>
+        <button onclick="window.print()" class="text-xs px-4 py-1.5 rounded-full bg-gray-900 text-white cursor-pointer">
             {{ __('cv.print') }}
         </button>
     </div>
 </div>
 
-{{-- padding و فونت‌ها به‌طور کلی کوچیک‌تر شدن نسبت به قبل --}}
-<div class="cv-sheet px-10 py-10 text-[13px] leading-snug">
+<div class="cv-sheet">
+
+    {{-- ===== SITE NOTICE ===== --}}
+    <div class="cv-notice">{!! __('cv.site_notice') !!}</div>
 
     {{-- ===== HEADER ===== --}}
-    <div class="flex justify-between items-start border-b-2 border-gray-900 pb-3 mb-4">
+    <header class="cv-header">
         <div>
-            <h1 class="text-2xl font-extrabold leading-tight">{{ __('cv.name') }}</h1>
-            <p class="text-gray-500 text-sm mt-0.5">{{ __('cv.title') }}</p>
-            <p class="text-gray-400 text-[11px] mt-1">{{ __('cv.legal_name_note') }}</p>
+            <h1 class="cv-name">{{ __('cv.name') }}</h1>
+            <p class="cv-title">{{ __('cv.title') }}</p>
         </div>
 
-        <div class="flex flex-col items-end gap-1 text-xs text-gray-600">
-            <a href="mailto:{{ config('mail.from.address') }}" class="flex items-center gap-1.5 hover:text-gray-900">
-                <span>{{ config('mail.from.address') }}</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                </svg>
-            </a>
-
-            <a href="tel:+989192454610" class="flex items-center gap-1.5 hover:text-gray-900">
-                <span dir="ltr">+98 919 245 46 10</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h1.5a2.25 2.25 0 002.25-2.25v-1.372a1 1 0 00-.757-.97l-4.348-1.086a1 1 0 00-1.019.259l-1.05 1.05a11.25 11.25 0 01-5.51-5.51l1.05-1.05a1 1 0 00.26-1.02L8.7 4.507a1 1 0 00-.97-.757H6.36A2.25 2.25 0 004.11 6a2.25 2.25 0 00-1.86.75z" />
-                </svg>
-            </a>
-
-            <a href="https://github.com/bitarun" target="_blank" class="flex items-center gap-1.5 hover:text-gray-900">
-                <span>github.com/bitarun</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.72-1.54-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 015.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.24 2.75.12 3.04.74.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.41-5.28 5.7.42.36.78 1.07.78 2.17 0 1.56-.01 2.82-.01 3.2 0 .3.2.66.79.55A10.52 10.52 0 0023.5 12c0-6.35-5.15-11.5-11.5-11.5z"/>
-                </svg>
-            </a>
-
-            <a href="https://www.linkedin.com/in/bita-badrkhani/" target="_blank" class="flex items-center gap-1.5 hover:text-gray-900">
-                <span>linkedin.com/in/bita-badrkhani</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/>
-                </svg>
-            </a>
-
-            <div class="flex items-center gap-1.5">
-                <span>{{ __('cv.contact_location') }}: {{ __('cv.location_value') }}</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                </svg>
-            </div>
+        <div class="cv-contact">
+            <div><a href="mailto:{{ config('portfolio.contact_email') }}" class="ltr-text">{{ config('portfolio.contact_email') }}</a></div>
+            <div><a href="{{ config('portfolio.github') }}" target="_blank" rel="noopener" class="ltr-text">{{ config('portfolio.github_label') }}</a></div>
+            <div><a href="{{ config('portfolio.linkedin') }}" target="_blank" rel="noopener" class="ltr-text">{{ config('portfolio.linkedin_label') }}</a></div>
+            <div><a href="{{ url('/') }}" target="_blank" rel="noopener" class="ltr-text">{{ config('portfolio.website_label') }}</a></div>
+            <div>{{ __('cv.location_value') }}</div>
         </div>
-    </div>
+    </header>
 
     {{-- ===== SUMMARY ===== --}}
-    <div class="mb-4">
-        <h2 class="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">{{ __('cv.summary_heading') }}</h2>
-        <p class="text-gray-700 leading-snug">{{ __('cv.summary_text') }}</p>
-    </div>
+    <section class="cv-section">
+        <h2 class="cv-h2">{{ __('cv.summary_heading') }}</h2>
+        <p class="cv-text">{{ __('cv.summary_text') }}</p>
+    </section>
 
-    {{-- ===== PROJECTS — خلاصه‌شده، یک خط برای هر پروژه ===== --}}
-    <div class="mb-4">
-        <div class="flex items-baseline justify-between mb-1">
-            <h2 class="text-[10px] font-bold uppercase tracking-wider text-gray-400">{{ __('cv.experience_heading') }}</h2>
-            <span class="text-[10px] text-gray-400">{!! __('cv.projects_note') !!}</span>
-        </div>
-        <div class="space-y-1.5">
-            @foreach($projects as $project)
-                <div class="flex items-baseline gap-2">
-                    <span class="font-semibold whitespace-nowrap">{{ $project->title }}</span>
-                    <span class="text-gray-400">—</span>
-                    <span class="text-gray-600 text-[12px]">{{ implode(', ', $project->tech_stack) }}</span>
+    {{-- ===== SELECTED PROJECTS ===== --}}
+    <section class="cv-section">
+        <h2 class="cv-h2">{{ __('cv.projects_heading') }}</h2>
+        @foreach(__('cv.projects') as $project)
+            <div class="cv-project">
+                <div class="cv-project-head">
+                    <span class="cv-project-name">{{ $project['title'] }}</span>
+                    <span class="cv-project-stack ltr-text">{{ $project['stack'] }}</span>
                 </div>
-            @endforeach
-        </div>
-    </div>
+                <p class="cv-project-text">{{ $project['text'] }}</p>
+            </div>
+        @endforeach
+        <p class="cv-note">{!! __('cv.projects_note') !!}</p>
+    </section>
 
     {{-- ===== SKILLS ===== --}}
-    <div class="mb-4">
-        <h2 class="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">{{ __('cv.skills_heading') }}</h2>
-        <div class="grid grid-cols-2 gap-x-6 gap-y-1 text-[12px]">
-            @foreach($skills as $category => $items)
-                <div>
-                    <span class="font-semibold">{{ __('skills.category.' . $category) }}: </span>
-                    <span class="text-gray-600">{{ $items->pluck('name')->implode('، ') }}</span>
-                </div>
-            @endforeach
-        </div>
-    </div>
+    <section class="cv-section">
+        <h2 class="cv-h2">{{ __('cv.skills_heading') }}</h2>
+        @foreach($skills as $category => $items)
+            <p class="cv-skill">
+                <b>{{ __('skills.category.' . $category) }}:</b>
+                <span>{{ $items->pluck('name')->implode($sep) }}</span>
+            </p>
+        @endforeach
+    </section>
 
-    {{-- ===== EDUCATION / COURSES ===== --}}
-    <div>
-        <h2 class="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">{{ __('cv.education_heading') }}</h2>
-        <div class="space-y-0.5">
-            @foreach(__('cv.courses') as $course)
-                <div class="flex justify-between text-[12px]">
-                    <span class="text-gray-700">
-                        @if(!empty($course['url']))
-                            <a href="{{ $course['url'] }}" target="_blank" class="underline decoration-dotted">{{ $course['title'] }}</a>
-                        @else
-                            {{ $course['title'] }}
-                        @endif
-                    </span>
-                    <span class="text-gray-400">{{ $course['provider'] }}</span>
-                </div>
+    {{-- ===== LEARNING PATH ===== --}}
+    <section class="cv-section">
+        <h2 class="cv-h2">{{ __('cv.path_heading') }}</h2>
+        <ul class="cv-path">
+            @foreach(__('cv.path') as $step)
+                <li>
+                    <span class="cv-path-year">{{ $step['year'] ?? '•' }}</span>
+                    <span>{{ $step['text'] }}</span>
+                </li>
             @endforeach
-        </div>
-    </div>
+        </ul>
+    </section>
+
+    {{-- ===== CERTIFICATE & COURSES ===== --}}
+    <section class="cv-section">
+        <h2 class="cv-h2">{{ __('cv.courses_heading') }}</h2>
+        @php($certificate = __('cv.certificate'))
+        <p class="cv-cert">
+            <a href="{{ asset(ltrim($certificate['url'], '/')) }}" target="_blank" rel="noopener">{{ $certificate['title'] }}</a>
+            <span class="prov">— {{ $certificate['provider'] }}</span>
+        </p>
+        <p class="cv-courses">
+            @foreach(__('cv.courses') as $course)
+                {{ $course['title'] }} <span class="prov">({{ $course['provider'] }})</span>@if(! $loop->last) · @endif
+            @endforeach
+        </p>
+    </section>
+
+    {{-- ===== WHAT I'M LOOKING FOR ===== --}}
+    <section class="cv-section" style="margin-bottom: 0;">
+        <h2 class="cv-h2">{{ __('cv.goal_heading') }}</h2>
+        <p class="cv-text">{{ __('cv.goal_text') }}</p>
+    </section>
 
 </div>
 

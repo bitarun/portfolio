@@ -14,4 +14,6 @@ Route::get('/lang/{locale}', [HomeController::class, 'switchLocale'])->name('loc
 
 Route::get('/cv', [CvController::class, 'index'])->name('cv');
 
-Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
+Route::post('/contact', [ContactController::class, 'send'])
+    ->middleware('throttle:5,1')
+    ->name('contact.send');

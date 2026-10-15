@@ -18,7 +18,7 @@ class Project extends Model
         'category',
         'tech_stack',
         'highlights_fa', 'highlights_en',
-        'github_url', 'demo_url', 'cover_image', 'code_snippet', 'screenshots',
+        'github_url', 'demo_url', 'video_url_en', 'video_url_fa', 'cover_image', 'code_snippet', 'screenshots',
         'order', 'is_featured',
     ];
 
@@ -48,6 +48,46 @@ class Project extends Model
     public function getHighlightsAttribute(): array
     {
         return $this->localized('highlights');
+    }
+
+    public function getCoverShotAttribute(): ?string
+    {
+        $shots = $this->screenshots ?? [];
+        return $shots[0] ?? null;
+    }
+
+    /**
+     * Demo video URL for the current locale, falling back to the other language.
+     */
+    public function getVideoUrlAttribute(): ?string
+    {
+        $fa = $this->video_url_fa ?: null;
+        $en = $this->video_url_en ?: null;
+
+        return app()->getLocale() === 'fa' ? ($fa ?? $en) : ($en ?? $fa);
+    }
+
+    /**
+     * Embeddable player URL for YouTube and Aparat links; null for anything else
+     * (the page then only shows a plain "watch" link).
+     */
+    public function getVideoEmbedUrlAttribute(): ?string
+    {
+        $url = $this->video_url;
+
+        if (! $url) {
+            return null;
+        }
+
+        if (preg_match('~(?:youtube\.com/watch\?(?:.*&)?v=|youtu\.be/|youtube\.com/embed/)([A-Za-z0-9_-]{11})~', $url, $m)) {
+            return 'https://www.youtube-nocookie.com/embed/' . $m[1];
+        }
+
+        if (preg_match('~aparat\.com/v/([A-Za-z0-9]+)~', $url, $m)) {
+            return 'https://www.aparat.com/video/video/embed/videohash/' . $m[1] . '/vt/frame';
+        }
+
+        return null;
     }
 
     public function scopeCategory(Builder $query, string $category): Builder
