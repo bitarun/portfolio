@@ -24,12 +24,13 @@
 
         {{-- ===================== TAB PANELS ===================== --}}
         @foreach($categories as $index => $category)
-            <div class="tab-panel grid gap-6 {{ $category === 'main' ? 'md:grid-cols-1' : 'md:grid-cols-2' }}"
+            @php($isWide = in_array($category, ['main', 'specialized']))
+            <div class="tab-panel grid gap-6 {{ $isWide ? 'md:grid-cols-1' : 'md:grid-cols-2' }}"
                  data-panel="{{ $category }}"
                  style="{{ $index === 0 ? '' : 'display:none' }}">
 
                 @forelse($projects[$category] as $project)
-                    @php($isMain = $category === 'main')
+                    @php($isMain = $isWide)
                     <div id="{{ $project->slug }}"
                          class="project-card cursor-pointer bg-base-card border border-base-line rounded-2xl p-7 hover:border-accent-dim transition {{ $isMain ? 'md:flex md:gap-8' : '' }}"
                          data-slug="{{ $project->slug }}">
@@ -49,28 +50,28 @@
                         @endif
 
                         <div class="flex-1 min-w-0">
-                        <h3 class="text-xl font-extrabold mb-2">{{ $project->title }}</h3>
-                        <p class="text-gray-300 text-sm mb-4">{{ $project->summary }}</p>
+                            <h3 class="text-xl font-extrabold mb-2">{{ $project->title }}</h3>
+                            <p class="text-gray-300 text-sm mb-4">{{ $project->summary }}</p>
 
-                        {{-- First highlights stay visible, so nothing important hides behind a click --}}
-                        @if($isMain && count($project->highlights))
-                            <ul class="grid gap-1.5 mb-4">
-                                @foreach(array_slice($project->highlights, 0, 3) as $point)
-                                    <li class="text-gray-400 text-sm flex gap-2">
-                                        <span class="text-accent">▸</span> <span>{!! $point !!}</span>
-                                    </li>
+                            {{-- First highlights stay visible, so nothing important hides behind a click --}}
+                            @if($isMain && count($project->highlights))
+                                <ul class="grid gap-1.5 mb-4">
+                                    @foreach(array_slice($project->highlights, 0, 3) as $point)
+                                        <li class="text-gray-400 text-sm flex gap-2">
+                                            <span class="text-accent">▸</span> <span>{!! $point !!}</span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
+
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                @foreach($project->tech_stack as $tech)
+                                    <span
+                                        class="font-mono text-xs text-gray-400 border border-base-line rounded px-2 py-1">{{ $tech }}</span>
                                 @endforeach
-                            </ul>
-                        @endif
+                            </div>
 
-                        <div class="flex flex-wrap gap-2 mb-3">
-                            @foreach($project->tech_stack as $tech)
-                                <span
-                                    class="font-mono text-xs text-gray-400 border border-base-line rounded px-2 py-1">{{ $tech }}</span>
-                            @endforeach
-                        </div>
-
-                        <span class="text-accent text-sm font-medium">
+                            <span class="text-accent text-sm font-medium">
                             {{ __('projects.view_details') }}
                             <span class="inline-block ltr:rotate-180">←</span>
                         </span>

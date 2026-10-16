@@ -3,6 +3,8 @@
 return [
     'name' => 'Bita Badrkhani',
     'title' => 'Backend Developer | PHP / Laravel',
+    'legal_name_label' => 'Legal name',
+    'legal_name' => 'Fatemeh Badrkhani',
     'print' => 'Print Resume',
 
     'site_notice' => 'This is a short summary CV. For full project details, live demos and code samples, please visit <a href="https://bitadev.pro" class="ltr-text">bitadev.pro</a>',
@@ -29,7 +31,7 @@ return [
     'path' => [
         ['year' => '2019', 'text' => 'Learned PHP and built a framework-free MVC store (router, controllers, models, admin panel); completed a PHP MVC course.'],
         ['year' => '2023', 'text' => 'Returned to programming and moved to Laravel: services, DTOs, repositories, events and queues, policies and REST APIs.'],
-        ['year' => null, 'text' => 'Went deeper on backend topics: Redis, payment gateways, real-time chat, search, Docker, testing, and a published Laravel package.'],
+        ['year' => '2026', 'text' => 'Went deeper on backend topics: Redis, payment gateways, real-time chat, search, Docker, testing, and a published Laravel package.'],
     ],
 
     'goal_heading' => 'What I\'m Looking For',

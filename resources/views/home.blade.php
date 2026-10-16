@@ -8,7 +8,7 @@
     <section class="min-h-screen grid md:grid-cols-[1.15fr_0.85fr] items-center gap-10 px-6 md:px-20 pt-32">
         <div class="reveal">
             <div dir="ltr"
-                class="font-mono text-sm max-w-md mb-8 bg-base-raise border border-base-line rounded-lg overflow-hidden">
+                 class="font-mono text-sm max-w-md mb-8 bg-base-raise border border-base-line rounded-lg overflow-hidden">
                 <div class="flex items-center gap-2 px-3.5 py-2.5 bg-[#1a1c22] border-b border-base-line">
                     <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
                     <span class="w-2.5 h-2.5 rounded-full bg-yellow-500"></span>
@@ -39,7 +39,7 @@
         </div>
 
         <div class="relative flex items-center justify-center h-96">
-            <div class="relative w-full max-w-xs mx-auto">
+            <div class="relative w-full max-w-[24rem] mx-auto">
                 @if(file_exists(public_path('images/me.webp')))
                     <img src="{{ asset('images/me.webp') }}" alt="Bita" class="w-full h-auto object-contain">
                 @else
@@ -156,7 +156,7 @@
                                     <span class="font-medium text-sm leading-tight">{{ $skill->name }}</span>
                                 </div>
                                 @if($skill->note)
-                                    <span class="hidden sm:block text-xs leading-snug text-gray-500 mt-1.5">{{ $skill->note }}</span>
+                                    <span class="block text-xs leading-snug text-gray-500 mt-1.5">{{ $skill->note }}</span>
                                 @endif
                             @endif
                             @if($skill->url)
@@ -190,8 +190,16 @@
                     <rect x="1" y="1" width="calc(100% - 2px)" height="calc(100% - 2px)" rx="14" ry="14" />
                 </svg>
             </div>
-            <div class="bio-card bg-base-card border border-base-line rounded-2xl p-8 text-gray-300 leading-loose">
-                {!! __('home.bio') !!}
+            <div class="bio-card rounded-2xl p-7 md:p-9 text-gray-300 leading-loose flex flex-col md:flex-row items-start gap-6">
+                <span class="bio-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M9.8 3.2a.75.75 0 0 1 1.4 0l1.1 3.1a6 6 0 0 0 3.6 3.6l3.1 1.1a.75.75 0 0 1 0 1.4l-3.1 1.1a6 6 0 0 0-3.6 3.6l-1.1 3.1a.75.75 0 0 1-1.4 0l-1.1-3.1a6 6 0 0 0-3.6-3.6l-3.1-1.1a.75.75 0 0 1 0-1.4l3.1-1.1a6 6 0 0 0 3.6-3.6l1.1-3.1Z"/>
+                        <path d="M18.4 2.4a.5.5 0 0 1 .95 0l.4 1.2a2.6 2.6 0 0 0 1.6 1.6l1.2.4a.5.5 0 0 1 0 .95l-1.2.4a2.6 2.6 0 0 0-1.6 1.6l-.4 1.2a.5.5 0 0 1-.95 0l-.4-1.2a2.6 2.6 0 0 0-1.6-1.6l-1.2-.4a.5.5 0 0 1 0-.95l1.2-.4a2.6 2.6 0 0 0 1.6-1.6l.4-1.2Z"/>
+                    </svg>
+                </span>
+                <div class="min-w-0">
+                    {!! __('home.bio') !!}
+                </div>
             </div>
         </div>
     </section>

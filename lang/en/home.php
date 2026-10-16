@@ -20,7 +20,11 @@ return [
 
     'about_eyebrow' => 'About Me',
     'about_title' => 'Why Programming',
-    'bio' => 'I\'m a PHP / Laravel backend developer. I like the balance of creativity and logic in backend work: taking an idea, breaking it into smaller pieces, and making those pieces work together so the result feels simple to use. Behind that simplicity there are usually hours of thinking, experimenting and fixing mistakes, and that is the part I enjoy most.<br><br>I\'m looking for my first professional backend role. So far I\'ve built full Laravel systems on my own, with payment flows, queues, real-time chat, Redis and APIs, and I\'m ready to bring that to a team and keep growing fast.',
+    'bio' => 'I&#x27;m a PHP / Laravel backend developer who loves solving problems and turning ideas into real, useful products that make a difference.<br><br>
+
+I&#x27;ve built several Laravel projects and worked with payment systems, real-time chat, APIs, Redis, and queues. Now, I&#x27;m excited to find my first professional opportunity, join a great team, and put my skills into practice on real-world projects.<br><br>
+
+I can&#x27;t wait to experience working in a professional environment, learn from my teammates, and contribute to building products that people actually use. For me, this isn&#x27;t just the start of a job; it&#x27;s the beginning of a journey I&#x27;ve been genuinely excited to take.',
 
     'contact_eyebrow' => 'Get in Touch',
     'contact_title' => "Let's Talk",

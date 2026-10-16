@@ -31,7 +31,7 @@ class SkillSeeder extends Seeder
             ['name_fa' => 'ساخت و انتشار پکیج', 'name_en' => 'Package Development', 'category' => 'more', 'note_fa' => 'انتشار روی Packagist', 'note_en' => 'Published on Packagist', 'order' => 13],
             ['name_fa' => 'Git', 'name_en' => 'Git', 'category' => 'more', 'note_fa' => 'کنترل نسخه در همه‌ی پروژه‌ها؛ branching و merge در تمرین‌ها', 'note_en' => 'Version control across all projects; branching and merging practiced in exercises', 'order' => 14],
             ['name_fa' => 'Nginx', 'name_en' => 'Nginx', 'category' => 'more', 'note_fa' => 'پیکربندی reverse proxy', 'note_en' => 'Reverse proxy configuration', 'order' => 15],
-            ['name_fa' => 'فرانت‌اند', 'name_en' => 'Frontend', 'category' => 'more', 'note_fa' => 'jQuery (AJAX)، Bootstrap 5 RTL، Vue.js (چت لحظه‌ای)، Tailwind CSS (همین سایت)', 'note_en' => 'jQuery (AJAX), Bootstrap 5 RTL, Vue.js (real-time chat), Tailwind CSS (this site)', 'order' => 16],
+            ['name_fa' => 'فرانت‌اند', 'name_en' => 'Frontend', 'category' => 'more', 'note_fa' => 'jQuery و Bootstrap 5 RTL در پروژه‌ها، Tailwind CSS ؛ و Vue.js فقط در حد بخش چت لحظه‌ای.', 'note_en' => 'jQuery and Bootstrap 5 RTL in my projects, Tailwind CSS; Vue.js only at a basic level, for the real-time chat.', 'order' => 16],
         ];
 
         // دسته‌بندی عوض شده، پس ردیف‌های قدیمی (که فقط داده‌ی seed هستند) اول پاک می‌شوند.
@@ -44,4 +44,4 @@ class SkillSeeder extends Seeder
             );
         }
     }
-}
+}

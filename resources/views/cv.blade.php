@@ -36,49 +36,59 @@
 
         .ltr-text { direction: ltr; unicode-bidi: isolate; display: inline-block; }
 
+        /* Base text size per language: Persian is set a bit larger because it has more spare room on the page. */
         .cv-sheet {
+            --cv-fs: 11.6px;
             background: #ffffff;
             width: 210mm;
             min-height: 297mm;
             margin: 24px auto 40px;
-            padding: 13mm 15mm;
-            font-size: 11.5px;
+            padding: 12mm 14mm;
+            font-size: var(--cv-fs);
             line-height: 1.5;
             box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.15);
             box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
         }
+        html[lang="fa"] .cv-sheet { --cv-fs: 12px; line-height: 1.6; }
+
+        /* Sections spread evenly over the full A4 height, so the page never ends with a big empty strip. */
+        .cv-body { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-between; }
 
         /* The website notice is only for the PDF / printed version. */
-        .cv-notice { display: none; background: #fff4ef; border: 1px solid #ff6a4d; border-radius: 6px; color: #8a2f18; font-size: 11.5px; font-weight: 600; text-align: center; padding: 6px 10px; margin-bottom: 12px; }
+        .cv-notice { display: none; background: #fff4ef; border: 1px solid #ff6a4d; border-radius: 6px; color: #8a2f18; font-size: 0.96em; font-weight: 600; text-align: center; padding: 6px 10px; margin-bottom: 12px; }
         .cv-notice a { color: #c2410c; text-decoration: underline; }
 
-        .cv-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 12px; }
-        .cv-name { font-size: 26px; font-weight: 700; line-height: 1.2; margin: 0; }
-        .cv-title { color: var(--cv-green); font-size: 13px; font-weight: 600; margin: 4px 0 0; }
-        .cv-contact { font-size: 11px; color: var(--cv-muted); line-height: 1.7; text-align: end; }
+        .cv-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; border-bottom: 2px solid #000; padding-bottom: 0.8em; margin-bottom: 1em; }
+        .cv-name { font-size: 2.3em; font-weight: 700; line-height: 1.2; margin: 0; }
+        .cv-title { color: var(--cv-green); font-size: 1.12em; font-weight: 600; margin: 0.3em 0 0; }
+        .cv-legal { color: var(--cv-muted); font-size: 0.96em; margin: 0.4em 0 0; }
+        .cv-legal span { color: var(--cv-ink); font-weight: 600; }
+        .cv-contact { font-size: 0.96em; color: var(--cv-muted); line-height: 1.8; text-align: end; }
         .cv-contact a { color: inherit; text-decoration: none; }
 
-        .cv-section { margin-bottom: 11px; }
-        .cv-h2 { font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cv-green); border-bottom: 1px solid #d9d9d9; padding-bottom: 2px; margin: 0 0 5px; }
+        .cv-section { margin-bottom: 0.9em; }
+        .cv-h2 { font-size: 0.92em; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cv-green); border-bottom: 1px solid #d9d9d9; padding-bottom: 0.25em; margin: 0 0 0.5em; }
         .cv-text { color: #222; margin: 0; }
 
-        .cv-project { margin-bottom: 5px; }
+        .cv-project { margin-bottom: 0.5em; }
         .cv-project-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
         .cv-project-name { font-weight: 700; }
-        .cv-project-stack { color: var(--cv-soft); font-size: 10.5px; }
+        .cv-project-stack { color: var(--cv-soft); font-size: 0.92em; }
         .cv-project-text { color: #333; margin: 0; }
-        .cv-note { color: var(--cv-soft); font-size: 10.5px; margin: 4px 0 0; }
+        .cv-note { color: var(--cv-soft); font-size: 0.92em; margin: 0.5em 0 0; }
         .cv-note a { color: inherit; text-decoration: underline; }
 
-        .cv-skill { margin: 0 0 2px; }
+        .cv-skill { margin: 0 0 0.3em; }
         .cv-skill b { font-weight: 700; }
         .cv-skill span { color: #333; }
 
         .cv-path { list-style: none; padding: 0; margin: 0; }
-        .cv-path li { display: flex; gap: 10px; margin-bottom: 3px; }
-        .cv-path-year { flex: 0 0 38px; font-weight: 700; color: var(--cv-green); }
+        .cv-path li { display: flex; gap: 10px; margin-bottom: 0.4em; }
+        .cv-path-year { flex: 0 0 3.4em; font-weight: 700; color: var(--cv-green); }
 
-        .cv-cert { margin: 0 0 4px; }
+        .cv-cert { margin: 0 0 0.45em; }
         .cv-cert a { color: inherit; text-decoration: underline; text-decoration-style: dotted; font-weight: 600; }
         .cv-cert .prov { color: var(--cv-soft); }
         .cv-courses { color: #333; margin: 0; }
@@ -119,87 +129,92 @@
     {{-- ===== SITE NOTICE ===== --}}
     <div class="cv-notice">{!! __('cv.site_notice') !!}</div>
 
-    {{-- ===== HEADER ===== --}}
-    <header class="cv-header">
-        <div>
-            <h1 class="cv-name">{{ __('cv.name') }}</h1>
-            <p class="cv-title">{{ __('cv.title') }}</p>
-        </div>
+    <div class="cv-body">
 
-        <div class="cv-contact">
-            <div><a href="mailto:{{ config('portfolio.contact_email') }}" class="ltr-text">{{ config('portfolio.contact_email') }}</a></div>
-            <div><a href="{{ config('portfolio.github') }}" target="_blank" rel="noopener" class="ltr-text">{{ config('portfolio.github_label') }}</a></div>
-            <div><a href="{{ config('portfolio.linkedin') }}" target="_blank" rel="noopener" class="ltr-text">{{ config('portfolio.linkedin_label') }}</a></div>
-            <div><a href="{{ url('/') }}" target="_blank" rel="noopener" class="ltr-text">{{ config('portfolio.website_label') }}</a></div>
-            <div>{{ __('cv.location_value') }}</div>
-        </div>
-    </header>
-
-    {{-- ===== SUMMARY ===== --}}
-    <section class="cv-section">
-        <h2 class="cv-h2">{{ __('cv.summary_heading') }}</h2>
-        <p class="cv-text">{{ __('cv.summary_text') }}</p>
-    </section>
-
-    {{-- ===== SELECTED PROJECTS ===== --}}
-    <section class="cv-section">
-        <h2 class="cv-h2">{{ __('cv.projects_heading') }}</h2>
-        @foreach(__('cv.projects') as $project)
-            <div class="cv-project">
-                <div class="cv-project-head">
-                    <span class="cv-project-name">{{ $project['title'] }}</span>
-                    <span class="cv-project-stack ltr-text">{{ $project['stack'] }}</span>
-                </div>
-                <p class="cv-project-text">{{ $project['text'] }}</p>
+        {{-- ===== HEADER ===== --}}
+        <header class="cv-header">
+            <div>
+                <h1 class="cv-name">{{ __('cv.name') }}</h1>
+                <p class="cv-title">{{ __('cv.title') }}</p>
+                <p class="cv-legal">{{ __('cv.legal_name_label') }}: <span>{{ __('cv.legal_name') }}</span></p>
             </div>
-        @endforeach
-        <p class="cv-note">{!! __('cv.projects_note') !!}</p>
-    </section>
 
-    {{-- ===== SKILLS ===== --}}
-    <section class="cv-section">
-        <h2 class="cv-h2">{{ __('cv.skills_heading') }}</h2>
-        @foreach($skills as $category => $items)
-            <p class="cv-skill">
-                <b>{{ __('skills.category.' . $category) }}:</b>
-                <span>{{ $items->pluck('name')->implode($sep) }}</span>
+            <div class="cv-contact">
+                <div><a href="mailto:{{ config('portfolio.contact_email') }}" class="ltr-text">{{ config('portfolio.contact_email') }}</a></div>
+                <div><a href="{{ config('portfolio.github') }}" target="_blank" rel="noopener" class="ltr-text">{{ config('portfolio.github_label') }}</a></div>
+                <div><a href="{{ config('portfolio.linkedin') }}" target="_blank" rel="noopener" class="ltr-text">{{ config('portfolio.linkedin_label') }}</a></div>
+                <div><a href="{{ url('/') }}" target="_blank" rel="noopener" class="ltr-text">{{ config('portfolio.website_label') }}</a></div>
+                <div>{{ __('cv.location_value') }}</div>
+            </div>
+        </header>
+
+        {{-- ===== SUMMARY ===== --}}
+        <section class="cv-section">
+            <h2 class="cv-h2">{{ __('cv.summary_heading') }}</h2>
+            <p class="cv-text">{{ __('cv.summary_text') }}</p>
+        </section>
+
+        {{-- ===== SELECTED PROJECTS ===== --}}
+        <section class="cv-section">
+            <h2 class="cv-h2">{{ __('cv.projects_heading') }}</h2>
+            @foreach(__('cv.projects') as $project)
+                <div class="cv-project">
+                    <div class="cv-project-head">
+                        <span class="cv-project-name">{{ $project['title'] }}</span>
+                        <span class="cv-project-stack ltr-text">{{ $project['stack'] }}</span>
+                    </div>
+                    <p class="cv-project-text">{{ $project['text'] }}</p>
+                </div>
+            @endforeach
+            <p class="cv-note">{!! __('cv.projects_note') !!}</p>
+        </section>
+
+        {{-- ===== SKILLS ===== --}}
+        <section class="cv-section">
+            <h2 class="cv-h2">{{ __('cv.skills_heading') }}</h2>
+            @foreach($skills as $category => $items)
+                <p class="cv-skill">
+                    <b>{{ __('skills.category.' . $category) }}:</b>
+                    <span>{{ $items->pluck('name')->implode($sep) }}</span>
+                </p>
+            @endforeach
+        </section>
+
+        {{-- ===== LEARNING PATH ===== --}}
+        <section class="cv-section">
+            <h2 class="cv-h2">{{ __('cv.path_heading') }}</h2>
+            <ul class="cv-path">
+                @foreach(__('cv.path') as $step)
+                    <li>
+                        <span class="cv-path-year">{{ $step['year'] ?? '•' }}</span>
+                        <span>{{ $step['text'] }}</span>
+                    </li>
+                @endforeach
+            </ul>
+        </section>
+
+        {{-- ===== CERTIFICATE & COURSES ===== --}}
+        <section class="cv-section">
+            <h2 class="cv-h2">{{ __('cv.courses_heading') }}</h2>
+            @php($certificate = __('cv.certificate'))
+            <p class="cv-cert">
+                <a href="{{ asset(ltrim($certificate['url'], '/')) }}" target="_blank" rel="noopener">{{ $certificate['title'] }}</a>
+                <span class="prov">— {{ $certificate['provider'] }}</span>
             </p>
-        @endforeach
-    </section>
+            <p class="cv-courses">
+                @foreach(__('cv.courses') as $course)
+                    {{ $course['title'] }} <span class="prov">({{ $course['provider'] }})</span>@if(! $loop->last) · @endif
+                @endforeach
+            </p>
+        </section>
 
-    {{-- ===== LEARNING PATH ===== --}}
-    <section class="cv-section">
-        <h2 class="cv-h2">{{ __('cv.path_heading') }}</h2>
-        <ul class="cv-path">
-            @foreach(__('cv.path') as $step)
-                <li>
-                    <span class="cv-path-year">{{ $step['year'] ?? '•' }}</span>
-                    <span>{{ $step['text'] }}</span>
-                </li>
-            @endforeach
-        </ul>
-    </section>
+        {{-- ===== WHAT I'M LOOKING FOR ===== --}}
+        <section class="cv-section" style="margin-bottom: 0;">
+            <h2 class="cv-h2">{{ __('cv.goal_heading') }}</h2>
+            <p class="cv-text">{{ __('cv.goal_text') }}</p>
+        </section>
 
-    {{-- ===== CERTIFICATE & COURSES ===== --}}
-    <section class="cv-section">
-        <h2 class="cv-h2">{{ __('cv.courses_heading') }}</h2>
-        @php($certificate = __('cv.certificate'))
-        <p class="cv-cert">
-            <a href="{{ asset(ltrim($certificate['url'], '/')) }}" target="_blank" rel="noopener">{{ $certificate['title'] }}</a>
-            <span class="prov">— {{ $certificate['provider'] }}</span>
-        </p>
-        <p class="cv-courses">
-            @foreach(__('cv.courses') as $course)
-                {{ $course['title'] }} <span class="prov">({{ $course['provider'] }})</span>@if(! $loop->last) · @endif
-            @endforeach
-        </p>
-    </section>
-
-    {{-- ===== WHAT I'M LOOKING FOR ===== --}}
-    <section class="cv-section" style="margin-bottom: 0;">
-        <h2 class="cv-h2">{{ __('cv.goal_heading') }}</h2>
-        <p class="cv-text">{{ __('cv.goal_text') }}</p>
-    </section>
+    </div>{{-- /.cv-body --}}
 
 </div>
 

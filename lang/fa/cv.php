@@ -3,6 +3,8 @@
 return [
     'name' => 'بیتا بدرخانی',
     'title' => 'توسعه‌دهنده بک‌اند | PHP / Laravel',
+    'legal_name_label' => 'نام شناسنامه‌ای',
+    'legal_name' => 'فاطمه بدرخانی',
     'print' => 'چاپ رزومه',
 
     'site_notice' => 'این یک رزومه‌ی خلاصه است. برای جزئیات کامل پروژه‌ها، دمو و نمونه‌کدها لطفاً به سایت من سر بزنید: <a href="https://bitadev.pro" class="ltr-text">bitadev.pro</a>',
@@ -29,7 +31,7 @@ return [
     'path' => [
         ['year' => '۲۰۱۹', 'text' => 'یادگرفتن PHP و ساخت یک فروشگاه با MVC دست‌ساز (روتر، کنترلر، مدل، پنل ادمین) و گذراندن دوره‌ی PHP MVC.'],
         ['year' => '۲۰۲۳', 'text' => 'بازگشت به برنامه‌نویسی و رفتن به Laravel: Service، DTO، Repository، Event و Queue، Policy و REST API.'],
-        ['year' => null, 'text' => 'عمیق‌تر شدن در بک‌اند: Redis، درگاه‌های پرداخت، چت لحظه‌ای، جستجو، Docker، تست‌نویسی و انتشار یک پکیج Laravel.'],
+        ['year' => '۲۰۲۶', 'text' => 'عمیق‌تر شدن در بک‌اند: Redis، درگاه‌های پرداخت، چت لحظه‌ای، جستجو، Docker، تست‌نویسی و انتشار یک پکیج Laravel.'],
     ],
 
     'goal_heading' => 'دنبال چه هستم',
