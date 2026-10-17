@@ -12,7 +12,7 @@ return [
     'location_value' => 'Qom, Iran',
 
     'summary_heading' => 'Summary',
-    'summary_text' => 'Backend developer focused on Laravel, clean architecture, Redis and Docker. I have built full Laravel systems on my own, with payment flows, queues, real-time chat and REST APIs, and I\'m looking for my first professional backend role: on-site in Qom, remote from Tehran, or remote with international teams.',
+    'summary_text' => 'Backend developer focused on Laravel, clean architecture, Redis and Docker. I have built full Laravel systems on my own, with payment flows, queues, real-time chat and REST APIs, and I\'m looking for my first professional backend role: on-site in Qom, remote from anywhere in Iran, or remote with international teams.',
 
     'projects_heading' => 'Selected Projects',
     'projects' => [
@@ -23,7 +23,7 @@ return [
         ['title' => 'RESTful API', 'stack' => 'Laravel, API Resources, Policy, PHPUnit', 'text' => 'Versioned API with HATEOAS-style links, Sanctum auth and 15 Feature tests.'],
         ['title' => 'Laravel Notification Service', 'stack' => 'PHP, Composer', 'text' => 'Email/SMS package published on Packagist.'],
     ],
-    'projects_note' => 'More projects and source code: <span class="ltr-text">github.com/bitarun</span> · Screenshots and details: <span class="ltr-text">bitadev.pro</span>',
+    'projects_note' => 'More projects and source code: <a href="https://github.com/bitarun" target="_blank" rel="noopener" class="ltr-text">github.com/bitarun</a> · Screenshots and details: <a href="https://bitadev.pro" target="_blank" rel="noopener" class="ltr-text">bitadev.pro</a>',
 
     'skills_heading' => 'Skills',
 

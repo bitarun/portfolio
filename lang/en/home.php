@@ -37,7 +37,7 @@ I can&#x27;t wait to experience working in a professional environment, learn fro
 
     'contact_direct' => 'Direct contact',
     'contact_throttled' => 'You have sent several messages in a short time. Please wait a minute and try again.',
-    'contact_availability' => 'Open to on-site work in Qom, remote work from Tehran, and remote roles with international teams.',
+    'contact_availability' => 'Open to on-site work in Qom, remote work from anywhere in Iran, and remote roles with international teams.',
     'contact_error' => 'Sorry, your message could not be sent right now. Please try again later or write to me directly by email.',
     'err_name' => 'Please enter your name.',
     'err_email' => 'Please enter a valid email address.',

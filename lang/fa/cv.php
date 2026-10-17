@@ -12,7 +12,7 @@ return [
     'location_value' => 'قم، ایران',
 
     'summary_heading' => 'درباره',
-    'summary_text' => 'توسعه‌دهنده‌ی بک‌اند با تمرکز روی Laravel، معماری تمیز، Redis و Docker. سیستم‌های کامل Laravel رو تنهایی ساختم، با جریان پرداخت، صف، چت لحظه‌ای و REST API، و دنبال اولین موقعیت حرفه‌ای‌م توی بک‌اند هستم: حضوری توی قم، دورکاری از تهران، یا دورکاری با تیم‌های خارجی.',
+    'summary_text' => 'توسعه‌دهنده‌ی بک‌اند با تمرکز روی Laravel، معماری تمیز، Redis و Docker. سیستم‌های کامل Laravel رو تنهایی ساختم، با جریان پرداخت، صف، چت لحظه‌ای و REST API، و دنبال اولین موقعیت حرفه‌ای‌م توی بک‌اند هستم: حضوری در قم، دورکاری از هر جای ایران، یا دورکاری با تیم‌های خارجی.',
 
     'projects_heading' => 'پروژه‌های منتخب',
     'projects' => [
@@ -23,7 +23,7 @@ return [
         ['title' => 'RESTful API', 'stack' => 'Laravel, API Resources, Policy, PHPUnit', 'text' => 'API نسخه‌بندی‌شده با لینک‌های سبک HATEOAS، احراز هویت Sanctum و ۱۵ تست Feature.'],
         ['title' => 'Laravel Notification Service', 'stack' => 'PHP, Composer', 'text' => 'پکیج اعلان ایمیل/پیامک منتشرشده روی Packagist.'],
     ],
-    'projects_note' => 'پروژه‌های بیشتر و کد منبع: <span class="ltr-text">github.com/bitarun</span> · تصاویر و جزئیات: <span class="ltr-text">bitadev.pro</span>',
+    'projects_note' => 'پروژه‌های بیشتر و کد منبع: <a href="https://github.com/bitarun" target="_blank" rel="noopener" class="ltr-text">github.com/bitarun</a> · تصاویر و جزئیات: <a href="https://bitadev.pro" target="_blank" rel="noopener" class="ltr-text">bitadev.pro</a>',
 
     'skills_heading' => 'مهارت‌ها',
 
